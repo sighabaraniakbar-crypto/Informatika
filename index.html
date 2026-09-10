@@ -1,1 +1,346 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Toko Sederhana</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+        header {
+            background: #198754;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        header h1 {
+            margin-bottom: 8px;
+        }
+
+        nav {
+            background: white;
+            padding: 12px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav a {
+            color: #198754;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .produk {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .gambar {
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 80px;
+            background: #e9f7ef;
+        }
+
+        .card h3 {
+            margin: 15px 10px 8px;
+        }
+
+        .harga {
+            color: #198754;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .card button {
+            background: #198754;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .card button:hover {
+            background: #146c43;
+        }
+
+        .keranjang {
+            margin-top: 35px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .keranjang h2 {
+            margin-bottom: 15px;
+        }
+
+        #daftarKeranjang {
+            margin-bottom: 15px;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .total {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .whatsapp {
+            width: 100%;
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .whatsapp:hover {
+            background: #1ebe5d;
+        }
+
+        footer {
+            margin-top: 40px;
+            background: #198754;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🛍️ TOKO KITA</h1>
+    <p>Belanja mudah, pesan langsung melalui WhatsApp</p>
+</header>
+
+<nav>
+    <a href="#produk">Produk</a>
+    <a href="#keranjang">Keranjang</a>
+</nav>
+
+<div class="container">
+
+    <h2 id="produk" style="margin-bottom:20px;">
+        🛒 Produk Kami
+    </h2>
+
+    <div class="produk">
+
+        <!-- TEH TAWAR -->
+        <div class="card">
+            <div class="gambar">🍵</div>
+
+            <h3>Teh Tawar</h3>
+
+            <p class="harga">
+                Rp5.000
+            </p>
+
+            <button onclick="tambahKeranjang('Teh Tawar', 5000)">
+                + Keranjang
+            </button>
+        </div>
+
+        <!-- BUAH KERSEN -->
+        <div class="card">
+            <div class="gambar">🍒</div>
+
+            <h3>Buah Kersen</h3>
+
+            <p class="harga">
+                Rp10.000
+            </p>
+
+            <button onclick="tambahKeranjang('Buah Kersen', 10000)">
+                + Keranjang
+            </button>
+        </div>
+
+        <!-- LADIES CLUB -->
+        <div class="card">
+            <div class="gambar">🌸</div>
+
+            <h3>Ladies Club</h3>
+
+            <p class="harga">
+                Rp15.000
+            </p>
+
+            <button onclick="tambahKeranjang('Ladies Club', 15000)">
+                + Keranjang
+            </button>
+        </div>
+
+    </div>
+
+
+    <!-- KERANJANG -->
+    <div class="keranjang" id="keranjang">
+
+        <h2>🛒 Keranjang Belanja</h2>
+
+        <div id="daftarKeranjang">
+            Keranjang masih kosong.
+        </div>
+
+        <div class="total">
+            Total: Rp<span id="total">0</span>
+        </div>
+
+        <button class="whatsapp" onclick="pesanWhatsApp()">
+            📱 Pesan Sekarang via WhatsApp
+        </button>
+
+    </div>
+
+</div>
+
+
+<footer>
+    <p>© 2026 Toko Kita</p>
+    <p>Pesan produk dengan mudah melalui WhatsApp</p>
+</footer>
+
+
+<script>
+
+    let keranjang = [];
+    let total = 0;
+
+
+    function formatRupiah(angka) {
+        return angka.toLocaleString("id-ID");
+    }
+
+
+    function tambahKeranjang(nama, harga) {
+
+        keranjang.push({
+            nama: nama,
+            harga: harga
+        });
+
+        total += harga;
+
+        tampilkanKeranjang();
+    }
+
+
+    function tampilkanKeranjang() {
+
+        const daftar = document.getElementById("daftarKeranjang");
+
+        if (keranjang.length === 0) {
+            daftar.innerHTML = "Keranjang masih kosong.";
+            return;
+        }
+
+        daftar.innerHTML = "";
+
+        keranjang.forEach((item, index) => {
+
+            daftar.innerHTML += `
+                <div class="item">
+                    <span>
+                        ${index + 1}. ${item.nama}
+                    </span>
+
+                    <span>
+                        Rp${formatRupiah(item.harga)}
+                    </span>
+                </div>
+            `;
+
+        });
+
+        document.getElementById("total").innerText =
+            formatRupiah(total);
+    }
+
+
+    function pesanWhatsApp() {
+
+        if (keranjang.length === 0) {
+            alert("Keranjang masih kosong!");
+            return;
+        }
+
+        let pesan = "Halo, saya ingin memesan:%0A%0A";
+
+        keranjang.forEach((item, index) => {
+
+            pesan +=
+                `${index + 1}. ${item.nama} - Rp${formatRupiah(item.harga)}%0A`;
+
+        });
+
+        pesan += `%0ATotal: Rp${formatRupiah(total)}`;
+
+        /*
+        GANTI NOMOR DI BAWAH DENGAN NOMOR WHATSAPP TOKO.
+
+        Format:
+        628xxxxxxxxxx
+
+        Jangan gunakan tanda + atau 0 di depan.
+        */
+
+        const nomorWhatsApp = "6281234567890";
+
+        const url =
+            "https://wa.me/" + nomorWhatsApp + "?text=" + pesan;
+
+        window.open(url, "_blank");
+    }
+
+</script>
+
+</body>
+              </html>
