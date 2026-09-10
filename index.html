@@ -1,11 +1,10 @@
-
-                    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Toko Gelap</title>
+    <title>TOKO GELAP</title>
 
     <style>
         * {
@@ -66,7 +65,7 @@
             padding-bottom: 20px;
         }
 
-        /* BAGIAN GAMBAR */
+        /* GAMBAR PRODUK */
         .gambar {
             width: 100%;
             height: 200px;
@@ -79,6 +78,15 @@
             height: 100%;
             object-fit: cover;
             display: block;
+        }
+
+        /* DESKRIPSI PRODUK */
+        .deskripsi {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+            padding: 0 15px;
+            margin-bottom: 12px;
         }
 
         .card h3 {
@@ -125,6 +133,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 10px;
             padding: 10px 0;
             border-bottom: 1px solid #ddd;
         }
@@ -192,16 +201,20 @@
 
         <!-- ========================= -->
         <!-- TEH TAWAR -->
-        <!-- GANTI FILE: teh.jpg -->
         <!-- ========================= -->
 
         <div class="card">
 
             <div class="gambar">
-                <img src="secangkir-teh-_190524103045-721.jpg" alt="Teh Tawar">
+                <img src="teh.jpg" alt="Teh Tawar">
             </div>
 
             <h3>Teh Tawar</h3>
+
+            <p class="deskripsi">
+                Teh tawar dengan rasa ringan dan menyegarkan.
+                Cocok dinikmati kapan saja, baik pagi maupun sore hari.
+            </p>
 
             <p class="harga">
                 Rp5.000
@@ -216,22 +229,26 @@
 
         <!-- ========================= -->
         <!-- BUAH KERSEN -->
-        <!-- GANTI FILE: kersen.jpg -->
         <!-- ========================= -->
 
         <div class="card">
 
             <div class="gambar">
-                <img src="339801582.jpg" alt="Buah Kersen">
+                <img src="kersen.jpg" alt="Buah Kersen">
             </div>
 
             <h3>Buah Kersen</h3>
 
-            <p class="harga">
-                Rp10.000
+            <p class="deskripsi">
+                Buah kersen segar dengan rasa manis dan khas.
+                Dijual dalam kemasan 1 kg.
             </p>
 
-            <button onclick="tambahKeranjang('Buah Kersen', 10000)">
+            <p class="harga">
+                Rp10.000 / 1 kg
+            </p>
+
+            <button onclick="tambahKeranjang('Buah Kersen 1 kg', 10000)">
                 + Keranjang
             </button>
 
@@ -240,22 +257,26 @@
 
         <!-- ========================= -->
         <!-- LADIES CLUB -->
-        <!-- GANTI FILE: ladies-club.jpg -->
         <!-- ========================= -->
 
         <div class="card">
 
             <div class="gambar">
-                <img src="smiley-women-posing-club-close-up_23-2149119637.jpg" alt="Ladies Club">
+                <img src="ladies-club.jpg" alt="Ladies Club">
             </div>
 
             <h3>Ladies Club</h3>
 
-            <p class="harga">
-                Rp1.000.000
+            <p class="deskripsi">
+                Produk Ladies Club dengan kualitas pilihan.
+                Cocok untuk kebutuhan dan koleksi pribadi.
             </p>
 
-            <button onclick="tambahKeranjang('Ladies Club', 15000)">
+            <p class="harga">
+                Rp5.000.000
+            </p>
+
+            <button onclick="tambahKeranjang('Ladies Club', 5000000)">
                 + Keranjang
             </button>
 
@@ -290,7 +311,7 @@
 
 
 <footer>
-    <p>© 2026 Toko Kita</p>
+    <p>© 2026 TOKO GELAP</p>
     <p>Pesan produk dengan mudah melalui WhatsApp</p>
 </footer>
 
@@ -303,9 +324,7 @@
 
     // FORMAT RUPIAH
     function formatRupiah(angka) {
-
         return angka.toLocaleString("id-ID");
-
     }
 
 
@@ -320,7 +339,6 @@
         total += harga;
 
         tampilkanKeranjang();
-
     }
 
 
@@ -340,14 +358,12 @@
             return;
         }
 
-
         daftar.innerHTML = "";
 
 
         keranjang.forEach((item, index) => {
 
             daftar.innerHTML += `
-
                 <div class="item">
 
                     <span>
@@ -363,15 +379,12 @@
                     </button>
 
                 </div>
-
             `;
-
         });
 
 
         document.getElementById("total").innerText =
             formatRupiah(total);
-
     }
 
 
@@ -383,11 +396,10 @@
         keranjang.splice(index, 1);
 
         tampilkanKeranjang();
-
     }
 
 
-    // PESAN WHATSAPP
+    // PESAN MELALUI WHATSAPP
     function pesanWhatsApp() {
 
         if (keranjang.length === 0) {
@@ -395,7 +407,6 @@
             alert("Keranjang masih kosong!");
 
             return;
-
         }
 
 
@@ -407,7 +418,6 @@
 
             pesan +=
                 `${index + 1}. ${item.nama} - Rp${formatRupiah(item.harga)}%0A`;
-
         });
 
 
@@ -427,10 +437,13 @@
 
 
         window.open(url, "_blank");
-
     }
 
 </script>
 
 </body>
-</html>        
+          </html>
+                                                    <!-- GANTI FILE: ladies-club.jpg -->
+        <!-- ========================= -->
+
+                            
