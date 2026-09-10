@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Toko Sederhana</title>
+    <title>Toko Kita</title>
 
     <style>
         * {
@@ -65,13 +65,18 @@
             padding-bottom: 20px;
         }
 
+        /* GAMBAR PRODUK */
         .gambar {
-            height: 180px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 80px;
+            width: 100%;
+            height: 200px;
             background: #e9f7ef;
+            overflow: hidden;
+        }
+
+        .gambar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .card h3 {
@@ -117,8 +122,18 @@
         .item {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
+            align-items: center;
+            padding: 10px 0;
             border-bottom: 1px solid #ddd;
+        }
+
+        .hapus {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 9px;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
         .total {
@@ -136,7 +151,7 @@
             border-radius: 8px;
             font-size: 17px;
             font-weight: bold;
-            cursor: pointer;.
+            cursor: pointer;
         }
 
         .whatsapp:hover {
@@ -173,9 +188,15 @@
 
     <div class="produk">
 
-        <!-- TEH TAWAR -->
+        <!-- ========================= -->
+        <!-- PRODUK 1 : TEH TAWAR -->
+        <!-- ========================= -->
+
         <div class="card">
-            <div class="gambar">🍵</div>
+
+            <div class="gambar">
+                <img src="teh.jpg" alt="Teh Tawar">
+            </div>
 
             <h3>Teh Tawar</h3>
 
@@ -186,11 +207,19 @@
             <button onclick="tambahKeranjang('Teh Tawar', 5000)">
                 + Keranjang
             </button>
+
         </div>
 
-        <!-- BUAH KERSEN -->
+
+        <!-- ========================= -->
+        <!-- PRODUK 2 : BUAH KERSEN -->
+        <!-- ========================= -->
+
         <div class="card">
-            <div class="gambar">🍒</div>
+
+            <div class="gambar">
+                <img src="kersen.jpg" alt="Buah Kersen">
+            </div>
 
             <h3>Buah Kersen</h3>
 
@@ -201,11 +230,19 @@
             <button onclick="tambahKeranjang('Buah Kersen', 10000)">
                 + Keranjang
             </button>
+
         </div>
 
-        <!-- LADIES CLUB -->
+
+        <!-- ========================= -->
+        <!-- PRODUK 3 : LADIES CLUB -->
+        <!-- ========================= -->
+
         <div class="card">
-            <div class="gambar">🌸</div>
+
+            <div class="gambar">
+                <img src="ladies-club.jpg" alt="Ladies Club">
+            </div>
 
             <h3>Ladies Club</h3>
 
@@ -216,12 +253,16 @@
             <button onclick="tambahKeranjang('Ladies Club', 15000)">
                 + Keranjang
             </button>
+
         </div>
 
     </div>
 
 
+    <!-- ========================= -->
     <!-- KERANJANG -->
+    <!-- ========================= -->
+
     <div class="keranjang" id="keranjang">
 
         <h2>🛒 Keranjang Belanja</h2>
@@ -251,14 +292,28 @@
 
 <script>
 
+    // =========================
+    // KERANJANG
+    // =========================
+
     let keranjang = [];
     let total = 0;
 
 
+    // =========================
+    // FORMAT RUPIAH
+    // =========================
+
     function formatRupiah(angka) {
+
         return angka.toLocaleString("id-ID");
+
     }
 
+
+    // =========================
+    // TAMBAH PRODUK
+    // =========================
 
     function tambahKeranjang(nama, harga) {
 
@@ -270,49 +325,98 @@
         total += harga;
 
         tampilkanKeranjang();
+
     }
 
 
+    // =========================
+    // TAMPILKAN KERANJANG
+    // =========================
+
     function tampilkanKeranjang() {
 
-        const daftar = document.getElementById("daftarKeranjang");
+        const daftar =
+            document.getElementById("daftarKeranjang");
 
         if (keranjang.length === 0) {
-            daftar.innerHTML = "Keranjang masih kosong.";
+
+            daftar.innerHTML =
+                "Keranjang masih kosong.";
+
+            document.getElementById("total").innerText = "0";
+
             return;
+
         }
 
+
         daftar.innerHTML = "";
+
 
         keranjang.forEach((item, index) => {
 
             daftar.innerHTML += `
+
                 <div class="item">
-                    <span>
-                        ${index + 1}. ${item.nama}
-                    </span>
 
                     <span>
-                        Rp${formatRupiah(item.harga)}
+                        ${index + 1}.
+                        ${item.nama}
+                        - Rp${formatRupiah(item.harga)}
                     </span>
+
+                    <button
+                        class="hapus"
+                        onclick="hapusProduk(${index})">
+                        Hapus
+                    </button>
+
                 </div>
+
             `;
 
         });
 
+
         document.getElementById("total").innerText =
             formatRupiah(total);
+
     }
 
+
+    // =========================
+    // HAPUS PRODUK
+    // =========================
+
+    function hapusProduk(index) {
+
+        total -= keranjang[index].harga;
+
+        keranjang.splice(index, 1);
+
+        tampilkanKeranjang();
+
+    }
+
+
+    // =========================
+    // WHATSAPP
+    // =========================
 
     function pesanWhatsApp() {
 
         if (keranjang.length === 0) {
+
             alert("Keranjang masih kosong!");
+
             return;
+
         }
 
-        let pesan = "Halo, saya ingin memesan:%0A%0A";
+
+        let pesan =
+            "Halo, saya ingin memesan:%0A%0A";
+
 
         keranjang.forEach((item, index) => {
 
@@ -321,26 +425,30 @@
 
         });
 
-        pesan += `%0ATotal: Rp${formatRupiah(total)}`;
 
-        /*
-        GANTI NOMOR DI BAWAH DENGAN NOMOR WHATSAPP TOKO.
+        pesan +=
+            `%0ATotal: Rp${formatRupiah(total)}`;
 
-        Format:
-        628xxxxxxxxxx
 
-        Jangan gunakan tanda + atau 0 di depan.
-        */
+        // NOMOR WHATSAPP TOKO
 
-        const nomorWhatsApp = "6285852734647";
+        const nomorWhatsApp =
+            "6285852734647";
+
 
         const url =
-            "https://wa.me/" + nomorWhatsApp + "?text=" + pesan;
+            "https://wa.me/" +
+            nomorWhatsApp +
+            "?text=" +
+            pesan;
+
 
         window.open(url, "_blank");
+
     }
 
 </script>
 
 </body>
-              </html>
+            </html>
+        
