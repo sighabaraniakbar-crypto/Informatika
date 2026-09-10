@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+                    <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -65,7 +66,7 @@
             padding-bottom: 20px;
         }
 
-        /* GAMBAR PRODUK */
+        /* BAGIAN GAMBAR */
         .gambar {
             width: 100%;
             height: 200px;
@@ -77,6 +78,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
 
         .card h3 {
@@ -189,13 +191,14 @@
     <div class="produk">
 
         <!-- ========================= -->
-        <!-- PRODUK 1 : TEH TAWAR -->
+        <!-- TEH TAWAR -->
+        <!-- GANTI FILE: teh.jpg -->
         <!-- ========================= -->
 
         <div class="card">
 
             <div class="gambar">
-                <img src="teh.jpg" alt="Teh Tawar">
+                <img src="secangkir-teh-_190524103045-721.jpg" alt="Teh Tawar">
             </div>
 
             <h3>Teh Tawar</h3>
@@ -212,13 +215,14 @@
 
 
         <!-- ========================= -->
-        <!-- PRODUK 2 : BUAH KERSEN -->
+        <!-- BUAH KERSEN -->
+        <!-- GANTI FILE: kersen.jpg -->
         <!-- ========================= -->
 
         <div class="card">
 
             <div class="gambar">
-                <img src="kersen.jpg" alt="Buah Kersen">
+                <img src="339801582.jpg" alt="Buah Kersen">
             </div>
 
             <h3>Buah Kersen</h3>
@@ -235,13 +239,14 @@
 
 
         <!-- ========================= -->
-        <!-- PRODUK 3 : LADIES CLUB -->
+        <!-- LADIES CLUB -->
+        <!-- GANTI FILE: ladies-club.jpg -->
         <!-- ========================= -->
 
         <div class="card">
 
             <div class="gambar">
-                <img src="ladies-club.jpg" alt="Ladies Club">
+                <img src="smiley-women-posing-club-close-up_23-2149119637.jpg" alt="Ladies Club">
             </div>
 
             <h3>Ladies Club</h3>
@@ -292,18 +297,11 @@
 
 <script>
 
-    // =========================
-    // KERANJANG
-    // =========================
-
     let keranjang = [];
     let total = 0;
 
 
-    // =========================
     // FORMAT RUPIAH
-    // =========================
-
     function formatRupiah(angka) {
 
         return angka.toLocaleString("id-ID");
@@ -311,10 +309,7 @@
     }
 
 
-    // =========================
     // TAMBAH PRODUK
-    // =========================
-
     function tambahKeranjang(nama, harga) {
 
         keranjang.push({
@@ -329,10 +324,7 @@
     }
 
 
-    // =========================
     // TAMPILKAN KERANJANG
-    // =========================
-
     function tampilkanKeranjang() {
 
         const daftar =
@@ -346,7 +338,6 @@
             document.getElementById("total").innerText = "0";
 
             return;
-
         }
 
 
@@ -384,10 +375,7 @@
     }
 
 
-    // =========================
     // HAPUS PRODUK
-    // =========================
-
     function hapusProduk(index) {
 
         total -= keranjang[index].harga;
@@ -399,10 +387,7 @@
     }
 
 
-    // =========================
-    // WHATSAPP
-    // =========================
-
+    // PESAN WHATSAPP
     function pesanWhatsApp() {
 
         if (keranjang.length === 0) {
@@ -431,9 +416,7 @@
 
 
         // NOMOR WHATSAPP TOKO
-
-        const nomorWhatsApp =
-            "6285852734647";
+        const nomorWhatsApp = "6285852734647";
 
 
         const url =
@@ -450,5 +433,4 @@
 </script>
 
 </body>
-            </html>
-        
+</html>        
